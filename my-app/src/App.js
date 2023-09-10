@@ -1,34 +1,54 @@
 import logo from './logo.svg';
 import './App.css';
 
-export const App = () => {
-	const currentYear = getFullYear(); // Императивный стиль
+import React from 'react';
 
-	return (
-		// Декларативный стиль начинается здесь:
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload 2.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-				<span>{currentYear} </span>
-			</header>
-		</div>
-		// Декларативный стиль заканчивается здесь
+export const App = () => {
+	const currentYear = getFullYear();
+
+	const logoElement = React.createElement('img', {
+		src: logo,
+		className: 'App-logo',
+		alt: 'logo',
+	});
+
+	const textElement = React.createElement(
+		'p',
+		null,
+		'Edit ',
+		React.createElement('code', null, 'src/App.js'),
+		' and save to reload.',
 	);
+
+	const linkElement = React.createElement(
+		'a',
+		{
+			className: 'App-link',
+			href: 'https://reactjs.org',
+			target: '_blank',
+			rel: 'noopener noreferrer',
+		},
+		'Learn React',
+	);
+
+	const yearElement = React.createElement('span', null, currentYear);
+
+	const headerElement = React.createElement(
+		'header',
+		{ className: 'App-header' },
+		logoElement,
+		textElement,
+		linkElement,
+		yearElement,
+	);
+
+	const appElement = React.createElement('div', { className: 'App' }, headerElement);
+
+	return appElement;
 };
 
 function getFullYear() {
-	let today = new Date(); // Императивный стиль
-	let year = today.getFullYear(); // Императивный стиль
-	return year; // Императивный стиль
+	let today = new Date();
+	let year = today.getFullYear();
+	return year;
 }
